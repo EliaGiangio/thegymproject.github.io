@@ -1,0 +1,354 @@
+/* Card styles for the gym list items */
+#gym-cards ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+#gym-cards li {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    /* Adjust the width as needed */
+    min-height: 200px;
+    /* Adjust the height as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styling for the gym name link */
+#gym-cards li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#gym-cards li h3 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Styling for other gym details */
+#gym-cards li p {
+    margin: 0;
+}
+
+/* Styling for the delete button */
+#gym-cards li .delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+/* Style for the home page banner */
+.banner {
+    background-size: cover;
+    background-position: center;
+    padding: 200px 0;
+    margin-bottom: 2%;
+}
+
+.banner h1 {
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.banner p {
+    font-size: 20px;
+    color: white;
+    opacity: .7;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+/* Style for the maps elements */
+.map-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+}
+
+.map {
+    height: 350px;
+    width: 600px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+#map1 {
+    height: 350px;
+    width: 400px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+.locations h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5%;
+}
+
+/* style for forms */
+.form-area {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    /* Center the form horizontally */
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#form-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#gymform div {
+    margin-bottom: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#gymform label {
+    font-weight: bold;
+}
+
+#gymform input,
+#gymform select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#gymform select {
+    appearance: none;
+    /* Remove default select arrow on some browsers */
+    background-color: #fff;
+}
+
+#gymform button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#gymform button:hover {
+    background-color: #0056b3;
+}
+
+#gymform button[type="submit"] {
+    margin-top: 20px;
+}
+
+#gymform button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#gymform button[type="submit"]:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+}
+
+#gymform button[type="submit"]:disabled:hover {
+    background-color: #a9a9a9;
+}
+
+#clear-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5%;
+    margin-left: 50%;
+}
+
+#clear-button:hover {
+    background-color: #b30000;
+}
+
+.form-gym-page{
+    background-color: #f9f9f9;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 5%;
+}
+
+#gymform-edit div {
+    margin-bottom: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#gymform-edit label {
+    font-weight: bold;
+}
+
+#gymform-edit input,
+#gymform-edit select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#gymform-edit select {
+    appearance: none;
+    /* Remove default select arrow on some browsers */
+    background-color: #fff;
+}
+
+#gymform-edit button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#gymform-edit button:hover {
+    background-color: #0056b3;
+}
+
+#gymform-edit button[type="submit"] {
+    margin-top: 20px;
+}
+
+#gymform-edit button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#gymform-edit button[type="submit"]:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+}
+
+#gymform-edit button[type="submit"]:disabled:hover {
+    background-color: #a9a9a9;
+}
+
+.footer {
+    background: #F4F4F4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100px;
+    padding: 0px 50px;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+#container-logged-user {
+    display: flex;
+}
+
+#locations-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 20px;
+    margin-top: 4%;
+}
+
+#logged-user {
+    flex: 1;
+    padding: 20px;
+}
+
+
+#gym-page-container {
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+}
+
+#gym-page-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+  }
+  
+  
+  #details-container {
+    padding: 20px; 
+  }
+  
+  #booking-container {
+    padding: 20px; 
+  }
+
+.home-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#edit-form{
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+}
+
+.form-inline{
+    display: flex;
+    justify-content: space-around;
+}
+
+.timeframe-inputs{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.timeframe-button{
+    margin-left:35%; 
+    margin-bottom: 0.5rem; 
+    margin-top: 0.5rem; 
+    width:30%;
+}
+
+#booking-delete-button{
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-bottom: 5px;
+}
+
+#booking-list li{
+    font-size: 20px;
+}

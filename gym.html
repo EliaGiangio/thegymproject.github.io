@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="login">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Logged in view</label>
+    </div>
+    <div id="gym-page-container">
+        <div id="details-container">
+            <h1 id="nameofgym"></h1>
+            <h3 id="address"></h3>
+            <h3 id="type"></h3>
+            <br>
+            <div id="map" style="display:none;"></div><br>
+            <div id="map1"></div><br>
+            <div>
+                <h3 id="booking-list-title" style="display: none;">Booked dates:</h3>
+                <ul id="booking-list"></ul>
+            </div>
+            <button class="home-button" onclick="window.location.href='index.html'">HOME</button>
+        </div>
+        <div id="bookigs-container">
+            <div id="logged-user" style="display: none;">
+                <div class="form-gym-page">
+                    <form id="gymform-edit">
+                        <h2 id="form-title">Edit gym's details</h2>
+                        <div>
+                            <label for="name-update">Gym name:</label><br>
+                            <input type="text" id="name-update" name="name-update" placeholder="Name"><br>
+                        </div>
+                        <div><br>
+                            <select id="type-update" name="type-update">
+                                <option value="" disabled selected hidden>Type of gym</option>
+                                <option>Powerlifting</option>
+                                <option>Weightlifting</option>
+                                <option>Strongman</option>
+                                <option>Crossfit</option>
+                                <option>Body Building</option>
+                            </select>
+                        </div><br>
+                        <div>
+                            <label for="address">Address:</label><br>
+                            <input type="text" id="street-update" name="street-update" placeholder="Street">
+                            <input type="text" id="street-number-update" name="street-number-update"
+                                placeholder="Street n°">
+                            <input type="text" id="city-update" name="city-update" placeholder="City">
+                        </div>
+                        <br>
+                        <div>
+                            <label for="start-time-update">Start:</label><br>
+                            <input type="number" id="start-time-update" name="start-time-update" placeholder="From"><br>
+                            <label for="end-time-update">End:</label><br>
+                            <input type="number" id="end-time-update" name="end-time-update" placeholder="Until"><br><br>
+                        </div>
+                        <div>
+                            <label for="price-update">Price:</label><br>
+                            <input type="number" id="price-update" name="price-update" placeholder="€"><br><br>
+                        </div>
+                        <div>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+            </div>
+
+            <div id="new-user" class="calendar-form"><br>
+                <div class="alert alert-dismissible alert-success" id="confirmation-card" style="display: none;">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        onclick="location.reload();"></button>
+                    <p id="confirmation-text"></p>
+                </div>
+                <div class="container mt-5">
+                    <div class="card">
+                        <h3 class="card-header" id="user-month"></h3>
+                        <table class="table table-bordered table-responsive-sm" id="calendar">
+                            <thead>
+                                <tr>
+                                    <th>Sun</th>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="calendar-body">
+
+                            </tbody>
+                        </table>
+                        <div class="form-inline">
+                            <button class="btn btn-outline-primary col-sm-5" id="past">Previous</button>
+                            <button class="btn btn-outline-primary col-sm-5" id="next">Next</button>
+                        </div>
+                        <br>
+                        <div class="form-group" style="margin-left: 1rem;">
+                            <p class="display-9" id="availability"></p>
+                            <label for="exampleSelect1" class="form-label mt-4">Select time and length of the
+                                session</label><br>
+                            <div class="timeframe-inputs">
+                                <select class="form-select col-sm-4" id="time-selector">
+                                    <option disabled selected value>Time</option>
+                                </select>
+                                <select class="form-select col-sm-4" id="timeframe">
+                                    <option disabled selected value>Length</option>
+                                    <option value="1">1hr</option>
+                                    <option value="2">2hrs</option>
+                                    <option value="3">3hrs</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm timeframe-button"
+                                onclick="timeSelection()">Select</button>
+                        </div>
+                    </div>
+                    <div class="card border-primary mb-3" style="max-width: 40rem; margin-top: 0.2rem;"
+                        id="booking-card">
+                        <div class="card-header">Your Booking</div>
+                        <div class="card-body">
+                            <p class="card-text" id="booking-date">Date:</p>
+                            <p class="card-text" id="booking-time">Time slot:</p>
+                            <button type="button" class="btn btn-outline-success"
+                                onclick="bookingConfirmation()">Confirm
+                                booking</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:none">
+        <h2>Check out more:</h2>
+        <ul id="gyms">
+            <form id="gymform"></form>
+        </ul>
+    </div>
+
+    <script src="index.js" async defer></script>
+</body>
+
+</html>
