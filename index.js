@@ -11,7 +11,7 @@ function Gym(name, street, number, city, type, startTime, endTime, price, bookin
 
 //logic for user login
 
-let loggedIn = localStorage.getItem('loggedIn') === 'false';
+let loggedIn = localStorage.getItem('loggedIn') === 'true';
 let loginButton = document.getElementById("login");
 
 function login(){
@@ -39,8 +39,6 @@ function updateDeleteButtonsVisibility() {
     deleteButtons.forEach(button => button.style.display = "none");
   }
 }
-
-
 loginButton.addEventListener("change", function(){login()});
 
 // set up for manipulating the data in Local storage
@@ -49,7 +47,8 @@ let data = savedData ? JSON.parse(savedData) : []; // Initialize data if it does
 
 // create some instances of Gym for test cases
 document.addEventListener("DOMContentLoaded",
-  initializeGyms()
+  initializeGyms(),
+  localStorage.setItem('loggedIn', 'false')
 );
 
 function initializeGyms() {
@@ -157,11 +156,14 @@ for (let y = 0; y < data.length; y++) {
   gymItem.appendChild(gymPrice);
   gymsList.appendChild(gymItem);
 
-  // Add a delete button for each gym
   let deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
   deleteButton.innerHTML = "Delete";
   gymItem.appendChild(deleteButton);
+  let buttons = document.getElementsByClassName("delete-button");
+  for (l = 0; l < buttons.length; l++){
+      buttons[l].style.display = "none"
+  } 
 
   // Event listener for delete button
   deleteButton.addEventListener("click", function () {
