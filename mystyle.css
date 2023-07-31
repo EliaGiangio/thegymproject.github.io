@@ -49,6 +49,7 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
 /* Style for the home page banner */
 .banner {
     background-size: cover;
@@ -71,6 +72,7 @@
     opacity: .7;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
+
 /* Style for the maps elements */
 .map-div {
     display: flex;
@@ -182,14 +184,14 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 5%;
-    margin-left: 50%;
+    margin-left: 30%;
 }
 
 #clear-button:hover {
     background-color: #b30000;
 }
 
-.form-gym-page{
+.form-gym-page {
     background-color: #f9f9f9;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -257,7 +259,7 @@
     background: #F4F4F4;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-around;
     height: 100px;
     padding: 0px 50px;
     color: rgba(0, 0, 0, 0.3);
@@ -273,7 +275,7 @@
     justify-content: space-between;
     flex: 1;
     padding: 20px;
-    margin-top: 4%;
+    margin-top: 7%;
 }
 
 #logged-user {
@@ -290,18 +292,18 @@
 
 #gym-page-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 20px; 
-  }
-  
-  
-  #details-container {
-    padding: 20px; 
-  }
-  
-  #booking-container {
-    padding: 20px; 
-  }
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+#details-container {
+    padding: 20px;
+}
+
+#booking-container {
+    padding: 20px;
+}
 
 .home-button {
     background-color: #007bff;
@@ -313,31 +315,31 @@
     cursor: pointer;
 }
 
-#edit-form{
+#edit-form {
     display: flex;
     align-content: stretch;
     justify-content: center;
 }
 
-.form-inline{
+.form-inline {
     display: flex;
     justify-content: space-around;
 }
 
-.timeframe-inputs{
+.timeframe-inputs {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
 }
 
-.timeframe-button{
-    margin-left:35%; 
-    margin-bottom: 0.5rem; 
-    margin-top: 0.5rem; 
-    width:30%;
+.timeframe-button {
+    margin-left: 35%;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    width: 30%;
 }
 
-#booking-delete-button{
+#booking-delete-button {
     background-color: #ff0000;
     color: #fff;
     padding: 5px 15px;
@@ -349,6 +351,80 @@
     margin-bottom: 5px;
 }
 
-#booking-list li{
+#booking-list li {
     font-size: 20px;
+}
+
+.gym-attendance-icon {
+    height: 20px;
+    width: 20px;
+    margin-left: 4%;
+}
+
+#maxattendance {
+    height: 5%;
+    width: 8%;
+}
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 0%;
+    left: 33%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 26%;
+    left: -4%;
+    margin-left: -5px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.footer-copyright {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-copyright img {
+    height: 20px;
+    width: 20px;
 }

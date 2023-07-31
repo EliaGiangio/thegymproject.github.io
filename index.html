@@ -85,17 +85,23 @@
             <input type="number" id="price" name="price" placeholder="€" required>
           </div>
           <div>
+            <label for="attendance">Allowed attendance:</label><br>
+            <input type="number" id="attendance" name="attendance" placeholder="Attendance" min="1" max="3" required>
+          </div>
+          <div>
             <button type="submit">Submit</button>
           </div>
         </form>
       </div>
-      <button id="clear-button" onclick="clearStorage()">CLEAR</button>
+      <button id="clear-button" onclick="clearStorage()">CLEAR LOCAL STORAGE</button>
     </div>
   </div>
 
   <div class="footer">
     <div class="footer-copyright">
-      TheGymProject is an idea of Elia Giangiordano
+      <p> TheGymProject is an idea of Elia Giangiordano <a href="https://www.linkedin.com/in/elia-giangiordano-146941172/"><img src="./assets/linkedin.png" alt="Linkedin"></a></p>
+      <a href="https://www.flaticon.com/free-icons/linkedin" style="font-size: 3px;" title="linkedin icons">Linkedin
+        icons created by Freepik - Flaticon</a>
     </div>
   </div>
   <script src="index.js" async defer></script>
