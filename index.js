@@ -1,25 +1,31 @@
 //define Gym object
-function Gym(name, street, number, city, type, startTime, endTime, price, bookings) {
+function Gym(name, street, number, city, type, startTime, endTime, price, attendance, bookings) {
   if (name) { this.name = name } else { this.name = street + " " + type };
-  this.address = street +" "+ number +" "+ city ;
+  this.address = street + " " + number + ", " + city;
   this.type = type;
   this.startTime = startTime;
   this.endTime = endTime;
   this.price = "€" + price;
+  this.attendance = attendance;
   this.bookings = bookings;
 };
 
-//logic for user login
+//Set variables for attendance icons
+let onePerson = "./assets/1-customer-max.png";
+let twoPeople = "./assets/2-customers-max.png";
+let threePeople = "./assets/3-customers-max.png";
 
+//logic for user login
 let loggedIn = localStorage.getItem('loggedIn') === 'true';
 let loginButton = document.getElementById("login");
 
-function login(){
-  if (!loggedIn){
+function login() {
+  if (!loggedIn) {
     loggedIn = true
     localStorage.setItem('loggedIn', 'true');
     document.getElementById("new-user").style.display = "none";
     document.getElementById("logged-user").style.display = "";
+    document.getElementById("confirmed-bookings").style.display = "";
     updateDeleteButtonsVisibility()
 
   } else {
@@ -27,6 +33,7 @@ function login(){
     localStorage.setItem('loggedIn', 'false');
     document.getElementById("new-user").style.display = "";
     document.getElementById("logged-user").style.display = "none";
+    document.getElementById("confirmed-bookings").style.display = "none";
     updateDeleteButtonsVisibility()
   }
 }
@@ -39,7 +46,7 @@ function updateDeleteButtonsVisibility() {
     deleteButtons.forEach(button => button.style.display = "none");
   }
 }
-loginButton.addEventListener("change", function(){login()});
+loginButton.addEventListener("change", function () { login() });
 
 // set up for manipulating the data in Local storage
 let savedData = localStorage.getItem('data');
@@ -60,8 +67,9 @@ function initializeGyms() {
     "Weightlifting",
     "9",
     "15",
-    "5"
-    )
+    "5",
+    "2"
+  )
 
   let dutchStrength = new Gym("Dutch Strength",
     "Hobbemakade",
@@ -70,8 +78,9 @@ function initializeGyms() {
     "Weightlifting",
     "9",
     "15",
-    "5"
-    )
+    "5",
+    "3"
+  )
 
   let RCF020 = new Gym("020",
     "Hoogoorddreef",
@@ -80,8 +89,9 @@ function initializeGyms() {
     "Crossfit",
     "9",
     "15",
-    "5"
-    )
+    "5",
+    "3"
+  )
 
   // Check if data array is empty before adding gyms
   if (data.length == 0) {
@@ -118,7 +128,8 @@ form.addEventListener('submit', (e) => {
     fd.get('type'),
     fd.get('start-time'),
     fd.get('end-time'),
-    fd.get('price')
+    fd.get('price'),
+    fd.get('attendance')
   )
   document.getElementById("gymform").reset();
   location.reload();
@@ -142,28 +153,38 @@ for (let y = 0; y < data.length; y++) {
   let gymAddress = document.createElement("p");
   let gymType = document.createElement("h3");
   let gymPrice = document.createElement("p");
+  let gymAttendance = document.createElement("img");
+  gymAttendance.classList.add('gym-attendance-icon')
 
-  //create list AND add ID to every link
+  //create list AND add ID to every link + set data to all the parts of the cards
   gymLink.href = "gym.html?id=" + y;
-  gymType.textContent = gym.type;
+  gymType.textContent = "Equipped for: " + gym.type;
   gymAddress.textContent = gym.address;
   gymPrice.textContent = gym.price + " per hour";
+  if (gym.attendance == "1") {
+    gymAttendance.src = onePerson
+  } else if (gym.attendance == "2") {
+    gymAttendance.src = twoPeople
+  } else { gymAttendance.src = threePeople };
+
   gymItem.appendChild(gymType);
   gymLink.appendChild(gymName);
   gymItem.appendChild(gymLink);
   gymItem.appendChild(gymAddress);
   gymItem.appendChild(gymType);
   gymItem.appendChild(gymPrice);
+  gymLink.appendChild(gymAttendance);
   gymsList.appendChild(gymItem);
 
+  //create delete button and dinamically append it to every card
   let deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
   deleteButton.innerHTML = "Delete";
   gymItem.appendChild(deleteButton);
   let buttons = document.getElementsByClassName("delete-button");
-  for (l = 0; l < buttons.length; l++){
-      buttons[l].style.display = "none"
-  } 
+  for (l = 0; l < buttons.length; l++) {
+    buttons[l].style.display = "none"
+  }
 
   // Event listener for delete button
   deleteButton.addEventListener("click", function () {
@@ -171,24 +192,24 @@ for (let y = 0; y < data.length; y++) {
     gymsList.removeChild(gymItem);
     location.reload();
   });
-  
+
   //obtain coordinates of each gym
-    var requestOptions = {
-      method: 'GET',
-    };
-    fetch("https://api.geoapify.com/v1/geocode/search?text="+gym.address+"&apiKey=b2a84fb0fbc3485a95c5328fff28dff5", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        // Get the first feature from the response
-        const feature = result.features[0];
-        if (feature) {
-          const lon = feature.properties.lon;
-          const lat = feature.properties.lat;
-          // Create a map marker using the coordinates
-          L.marker([lat, lon]).addTo(generalMap).bindPopup(gym.name);
-        }
-      })
-      .catch(error => console.log('error', error));
+  var requestOptions = {
+    method: 'GET',
+  };
+  fetch("https://api.geoapify.com/v1/geocode/search?text=" + gym.address + "&apiKey=b2a84fb0fbc3485a95c5328fff28dff5", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // Get the first feature from the response
+      const feature = result.features[0];
+      if (feature) {
+        const lon = feature.properties.lon;
+        const lat = feature.properties.lat;
+        // Create a map marker using the coordinates
+        L.marker([lat, lon]).addTo(generalMap).bindPopup(gym.name);
+      }
+    })
+    .catch(error => console.log('error', error));
 }
 
 // using the if statement on "details-container" to make sure that only gym.html will have the following features
@@ -204,24 +225,39 @@ if (document.getElementById("details-container")) {
   document.getElementById("nameofgym").innerHTML = selectedGym.name;
   document.getElementById("address").innerHTML = selectedGym.address;
   document.getElementById("type").innerHTML = selectedGym.type;
+  if (selectedGym.attendance == "1") {
+    document.getElementById("maxattendance").src = onePerson;
+    document.getElementById("myPopup").textContent = "Max capacity: 1 Person"
+  } else if (selectedGym.attendance == "2") {
+    document.getElementById("maxattendance").src = twoPeople;
+    document.getElementById("myPopup").textContent = "Max capacity: 2 people"
+  } else { document.getElementById("maxattendance").src = threePeople;
+  document.getElementById("myPopup").textContent = "Max capacity: 3 people"
+};
 
-    //obtain coordinates of each gym
-    var requestOptions = {
-      method: 'GET',
-    };
-    fetch("https://api.geoapify.com/v1/geocode/search?text="+selectedGym.address+"&apiKey=b2a84fb0fbc3485a95c5328fff28dff5", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        // Get the first feature from the response
-        const feature = result.features[0];
-        if (feature) {
-          const lon = feature.properties.lon;
-          const lat = feature.properties.lat;
-          // Create a map marker using the coordinates
-          L.marker([lat, lon]).addTo(singleMap).bindPopup(selectedGym.name).openPopup();
-        }
-      })
-      .catch(error => console.log('error', error));
+  function attendancePopup(){
+    let popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+  };
+  
+
+  //obtain coordinates of each gym
+  var requestOptions = {
+    method: 'GET',
+  };
+  fetch("https://api.geoapify.com/v1/geocode/search?text=" + selectedGym.address + "&apiKey=b2a84fb0fbc3485a95c5328fff28dff5", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // Get the first feature from the response
+      const feature = result.features[0];
+      if (feature) {
+        const lon = feature.properties.lon;
+        const lat = feature.properties.lat;
+        // Create a map marker using the coordinates
+        L.marker([lat, lon]).addTo(singleMap).bindPopup(selectedGym.name).openPopup();
+      }
+    })
+    .catch(error => console.log('error', error));
 
   //Edit
   let editForm = document.getElementById("gymform-edit")
@@ -236,12 +272,14 @@ if (document.getElementById("details-container")) {
     if (fdn.get("start-time-update").length !== 0) { selectedGym.startTime = fdn.get("start-time-update") }
     if (fdn.get("end-time-update").length !== 0) { selectedGym.endTime = fdn.get("end-time-update") }
     if (fdn.get("price-update").length !== 0) { selectedGym.price = fdn.get("price-update") }
+    if (fdn.get("attendance-update").length !== 0) { selectedGym.attendance = fdn.get("attendance-update") }
 
     let street = fdn.get("street-update");
     let number = fdn.get("street-number-update");
     let city = fdn.get("city-update");
     if (street && number && city) {
-      selectedGym.address = street + " " + number + " " + city;}
+      selectedGym.address = street + " " + number + " " + city;
+    }
 
     // Save the updated data to localStorage (as string)
     localStorage.setItem('data', JSON.stringify(data));
@@ -385,30 +423,31 @@ if (document.getElementById("details-container")) {
     document.getElementById("confirmation-card").style.display = "block";
   }
 
- //Make a list of the bookings for a specific gym in order to delete them if needed
+  //Make a list of the bookings for a specific gym in order to delete them if needed
   let bookingList = document.getElementById("booking-list");
   if (selectedGym.bookings.length > 0) {
     document.getElementById("booking-list-title").style.display = "block";
     for (let b = 0; b < selectedGym.bookings.length; b++) {
       let booking = selectedGym.bookings[b];
       let bookingItem = document.createElement("li");
-      let bookingName = document.createTextNode(booking[0] + " " + booking[1] + " from " + booking[2] + ":00 till " + booking[3] +":00");
+      let bookingName = document.createTextNode(booking[0] + " " + booking[1] + " from " + booking[2] + ":00 till " + booking[3] + ":00");
       let deleteBookingButton = document.createElement("button");
       deleteBookingButton.setAttribute("id", "booking-delete-button")
       deleteBookingButton.innerHTML = "X";
       bookingItem.appendChild(bookingName)
       bookingItem.appendChild(deleteBookingButton)
       bookingList.appendChild(bookingItem);
-      deleteBookingButton.addEventListener("click", function() {
+      deleteBookingButton.addEventListener("click", function () {
         deleteBooking(b);
         bookingList.removeChild(bookingItem);
-      });}
+      });
+    }
 
-      function deleteBooking(index) {
-        console.log(index)
-        selectedGym.bookings.splice(index, 1); 
-        localStorage.setItem("data", JSON.stringify(data));
-      }
+    function deleteBooking(index) {
+      console.log(index)
+      selectedGym.bookings.splice(index, 1);
+      localStorage.setItem("data", JSON.stringify(data));
+    }
   }
 }
 
@@ -429,4 +468,3 @@ function clearStorage() {
 
 
 
-   

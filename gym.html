@@ -28,10 +28,14 @@
             <h1 id="nameofgym"></h1>
             <h3 id="address"></h3>
             <h3 id="type"></h3>
+            <div class="popup" onclick="attendancePopup()">
+                <img id="maxattendance">
+                <span class="popuptext" id="myPopup"></span>
+            </div>
             <br>
             <div id="map" style="display:none;"></div><br>
             <div id="map1"></div><br>
-            <div>
+            <div id="confirmed-bookings" style="display: none;">
                 <h3 id="booking-list-title" style="display: none;">Booked dates:</h3>
                 <ul id="booking-list"></ul>
             </div>
@@ -73,6 +77,10 @@
                         <div>
                             <label for="price-update">Price:</label><br>
                             <input type="number" id="price-update" name="price-update" placeholder="€"><br><br>
+                        </div>
+                        <div>
+                            <label for="attendance-update">Allowed attendance:</label><br>
+                            <input type="number" id="attendance-update" name="attendance-update" placeholder="Attendance" min="1" max="3"><br><br>
                         </div>
                         <div>
                             <button type="submit">Submit</button>
